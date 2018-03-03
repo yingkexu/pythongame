@@ -1,0 +1,10 @@
+ii = '*'
+
+print('input a number')
+
+number = input()
+
+str = ''
+for i in range(int(number)):
+    str = str + ii
+print(str)

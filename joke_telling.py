@@ -1,0 +1,13 @@
+print('what do you get when you cross a cow and a vampire?')
+input()
+print('frostbite')
+print('')
+print('knock knock')
+input()
+print('whos there?')
+input()
+print('interupting cow')
+input()
+print('interupting cow wh',end='')
+print('-mooooooooooo')
+
