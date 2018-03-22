@@ -104,8 +104,13 @@ while hp > 0 and hpp > 0:
 if hp > hpp:
     print('you win!')
 
-else:
+elif hp < hpp:
     print('you lose:( .')
+
+if hp and hpp < 0:
+    print('you drew and died a heroic death')
+
+time.sleep(3)
     
     
 
