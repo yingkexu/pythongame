@@ -51,7 +51,9 @@ HANGMAN_PICS = ['''
        ===''']
 
     
-words = 'preference contract agreement uncle wife maintenance solution player health tooth efficiency delivery weakness fortune discussion setting singer transportation storage housing ninformation magazine language celebration profession employment lab meat promotion historian pizza outcome apartment anxiety contribution freedom poem chemistry requirement pie interaction university college menu payment inspection gate mall client driver tea politics funeral sample management student customer youth environment'.split()
+words = {'colors':'red orange yellow green blue white black brown indigo violate' .split(),
+         'shapes':'circle square septagon triangle dodecadon ellipse rhombus trapezoid hexagon pentagon' .split()
+        'animals':'bat bear cow pig rhino wombat panda frog turtle whale zebra cat dog wolf lion lama fox eagle crab shark fish squid rat hamster mouse
 
 def getRandomWord(wordList):
     wordIndex = random.randint(0,len(wordList) - 1)
