@@ -1,5 +1,6 @@
-import random                                                           
-HANGMAN_PICS = ['''
+import random
+def get_list():
+    return ['''
    +----+
         !
         !
@@ -49,7 +50,7 @@ HANGMAN_PICS = ['''
    / \   !
        ===
        ===''']
-
+HANGMAN_PICS = get_list()
     
 words = {'colors':'red orange yellow green blue white black brown indigo violate' .split(),
          'shapes':'circle square septagon triangle dodecadon ellipse rhombus trapezoid hexagon pentagon' .split(),
@@ -101,23 +102,22 @@ def playAgain():
 
 print('H A N G M A N')
 
-difficulty = ''
+difficulty = ' '
 while difficulty not in 'EMHI':
     print('Enter difficilty: E - easy, M - medium, H - hard, I - impossible.')
     difficulty = input().upper()
+    
 if difficulty == 'M':
-    del HANGMAN_PICS[8]
     del HANGMAN_PICS[7]
+    del HANGMAN_PICS[6]
 
 if difficulty == 'H':
-    del HANGMAN_PICS[8]
     del HANGMAN_PICS[7]
     del HANGMAN_PICS[6]
     del HANGMAN_PICS[5]
     del HANGMAN_PICS[4]
     
 if difficulty == 'I':
-    del HANGMAN_PICS[8]
     del HANGMAN_PICS[7]
     del HANGMAN_PICS[6]
     del HANGMAN_PICS[5]
@@ -127,10 +127,11 @@ if difficulty == 'I':
 
 missedLetters = ''
 correctLetters = ''
-secretWord = getRandomWord(words)
+secretWord, secretSet = getRandomWord(words)
 gameIsDone = False
 
 while True:
+    print('The secretword is in the set: ' + secretSet)
     displayBoard(missedLetters, correctLetters, secretWord)
 
     guess = getGuess(missedLetters + correctLetters)
@@ -143,24 +144,45 @@ while True:
             if secretWord[i] not in correctLetters:
                 foundAllLetters = False
                 break
-        if foundAllLetters:
+        if foundAllLetters: 
             print('yeah you have won! The secret word was "' + secretWord + '"! You have won!')
             gameIsDone = True
     else:
         missedLetters = missedLetters + guess
-        print(len(missedLetters))
-        print(len(HANGMAN_PICS))
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
             displayBoard(missedLetters, correctLetters, secretWord)
-            print('you ran out of guesses\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses,the word was "' + str(secretWord) + '"')
+            print('you ran out of guesses\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses,the word was "' + secretWord + '"')
             gameIsDone = True
 
     if gameIsDone:
         if playAgain():
+            HANGMAN_PICS = get_list()
+            difficulty = ' '
+            while difficulty not in 'EMHI':
+                print('Enter difficilty: E - easy, M - medium, H - hard, I - impossible.')
+                difficulty = input().upper()
+                
+            if difficulty == 'M':
+                del HANGMAN_PICS[7]
+                del HANGMAN_PICS[6]
+
+            if difficulty == 'H':
+                del HANGMAN_PICS[7]
+                del HANGMAN_PICS[6]
+                del HANGMAN_PICS[5]
+                del HANGMAN_PICS[4]
+                
+            if difficulty == 'I':
+                del HANGMAN_PICS[7]
+                del HANGMAN_PICS[6]
+                del HANGMAN_PICS[5]
+                del HANGMAN_PICS[4]
+                del HANGMAN_PICS[3]
+                del HANGMAN_PICS[2]
             missedLetters = ''
             correctLetters = ''
             gameIsDone = False
-            secretWord = getRandomWord(words)
+            secretWord, secretSet = getRandomWord(words)
         else:
             break
         
