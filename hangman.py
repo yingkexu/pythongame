@@ -102,7 +102,7 @@ def playAgain():
 print('H A N G M A N')
 
 difficulty = ''
-while difficulty nit in 'EMHI':
+while difficulty not in 'EMHI':
     print('Enter difficilty: E - easy, M - medium, H - hard, I - impossible.')
     difficulty = input().upper()
 if difficulty == 'M':
