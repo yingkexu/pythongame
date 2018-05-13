@@ -18,7 +18,7 @@ def inputPlayerLetter():
         else: 
             return['O','X']        
                
-def whoGoesForst():
+def whoGoesFirst():
     if random.randint(0,1) == 0:
         return 'computer'
     else:
@@ -35,20 +35,20 @@ def isWinner(bo, le):
            (bo[8] == le and bo[5] == le and bo[2] == le) or
            (bo[9] == le and bo[6] == le and bo[3] == le) or
            (bo[7] == le and bo[5] == le and bo[3] == le) or
-           (bo[9] == le and bo[6] == le and bo[1] == le))
+           (bo[9] == le and bo[5] == le and bo[1] == le))
 
 def getBoardCopy(board):
     boardCopy = [ ]
     for i in board:
         boardCopy.append(i)
-    return BoardCopy
+    return boardCopy
 
 def isSpaceFree(board, move):
     return board[move] == ' '
     
 def getPlayerMove(board):
     move = ' '
-    while move not in '1 2 3 4 5 6 7 8 9 ' .split() or isSpaceFree(board, int(move)):
+    while move not in '1 2 3 4 5 6 7 8 9 ' .split() or not isSpaceFree(board, int(move)):
         print('What is your next move? (1-9) choose a place that has not been taken.')
         move = input()
     return int(move)
@@ -74,7 +74,7 @@ def getComputerMove(board, computerLetter):
         boardCopy = getBoardCopy(board)
         if isSpaceFree(boardCopy, i):
             makeMove(boardCopy, computerLetter, i)
-        if ifWinner(boardCopy, computerLetter):
+        if isWinner(boardCopy, computerLetter):
             return i
 
     for i in range(1, 10):
@@ -91,4 +91,59 @@ def getComputerMove(board, computerLetter):
     if isSpaceFree(board, 5):
         return 5
     
-    
+    return chooseRandomMoveFromList(board, [ 2, 4, 6, 8])
+
+def isBoardFull(board):
+    for i in range(1, 10):
+        if isSpaceFree(board, i):
+            return False
+    return True
+
+print('This is tic tac toe!')
+
+while True:
+    theBoard = [' '] * 10
+    playerLetter, computerLetter = inputPlayerLetter()
+    turn = whoGoesFirst()
+    print('The ' + turn + ' will go first.')
+    gameIsPlaying = True
+
+    while gameIsPlaying:
+        if turn == 'player':
+            drawBoard(theBoard)
+            move = getPlayerMove(theBoard)
+            print('1')
+            makeMove(theBoard, playerLetter, move)
+            print('2')
+            if isWinner(theBoard, playerLetter):
+                drawBoard(theBoard)
+                print('Hooray! You have won against me! Well done!')
+                gameIsPlaying = False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print('We tied against each other! Good game!')
+                    break
+                else:
+                    turn = 'computer'
+            
+        else:
+            move = getComputerMove(theBoard, computerLetter)
+            makeMove(theBoard, computerLetter, move)
+
+            if isWinner(theBoard, computerLetter):
+                drawBoard(theBoard)
+                print('Oh no! I beat you! You played exceptionally well!')
+                gameIsPlaying = False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print('We tied!')
+                    break
+                else:
+                    turn = 'player'
+
+    print('Do you want to play again? (yes or no)')
+    if not input().lower().startswith('y'):
+        break
+                
