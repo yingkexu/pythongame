@@ -53,9 +53,22 @@ def countMatchDigits(possibleNumber, number, numberOfMatchDigit):
 def keepNumber(number):
     for n in number:
         possibleNumbers[:] = [x for x in possibleNumbers if n in x]
+        
+def removeNotF(guessingNumber, numberOfF):
+    possibleNumbers[:] = [x for x in possibleNumbers if haveNumbersF(guessingNumber, x, numberOfF)]
+    
+def haveNumbersF(guessingNumber, number, numberOfF):
+    countSameNumberInSamePosition = 0
+    for i, n in enumerate(number):
+        if n == guessingNumber[i]:
+            countSameNumberInSamePosition += 1
+    if countSameNumberInSamePosition >= numberOfF:
+        return True
+    return False
+        
 
 while True:
-    s = raw_input('what it returned?')
+    s = input('what it returned?')
     
     # b. remove numbers that contains digit in s
     if s == 'b':
@@ -74,12 +87,14 @@ while True:
         if len(s) < len(previousS):
             for p in previousGussingNumber:
                 if p not in guessingNumber:
-                    keepNumber(n)
+                    keepNumber(p)
             for g in guessingNumber:
                 if g not in previousGussingNumber:
                     remove(g)
                     
-            
+         # for condition numbers of f
+        numberOfF = s.count('f')
+        removeNotF(guessingNumber, numberOfF)   
         
     # store previous guessing number and s
     previousGussingNumber = guessingNumber
