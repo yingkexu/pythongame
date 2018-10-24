@@ -62,7 +62,7 @@ def haveNumbersF(guessingNumber, number, numberOfF):
     for i, n in enumerate(number):
         if n == guessingNumber[i]:
             countSameNumberInSamePosition += 1
-    if countSameNumberInSamePosition >= numberOfF:
+    if countSameNumberInSamePosition == numberOfF:
         return True
     return False
         
@@ -94,7 +94,8 @@ while True:
                     
          # for condition numbers of f
         numberOfF = s.count('f')
-        removeNotF(guessingNumber, numberOfF)   
+        if numberOfF > 0:
+            removeNotF(guessingNumber, numberOfF)   
         
     # store previous guessing number and s
     previousGussingNumber = guessingNumber
