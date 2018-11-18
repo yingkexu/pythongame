@@ -55,7 +55,7 @@ def keepNumber(number):
         possibleNumbers[:] = [x for x in possibleNumbers if n in x]
 
 while True:
-    s = raw_input('what it returned?')
+    s = input('what it returned?')
     
     # b. remove numbers that contains digit in s
     if s == 'b':
