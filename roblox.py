@@ -1,3 +1,5 @@
+# need to install  pywin32. run: 
+# pip install pywin32
 import win32api
 import win32gui
 import win32con
